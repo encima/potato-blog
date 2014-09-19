@@ -13,6 +13,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField()
     body = models.TextField()
     tag = models.ForeignKey('blog.Tag')
+    markdown = models.BooleanField(default=True)
 
     # objects = PostManager()
 
@@ -26,7 +27,8 @@ class Post(models.Model):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'markdown']
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, db_index=True)

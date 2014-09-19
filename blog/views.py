@@ -28,9 +28,12 @@ def new_post(request):
 def view_post(request, slug):   
     print 'view post'
     post = get_object_or_404(Post, slug=slug)
+    body = post.body
+    if(post.markdown == True):
+        markdown.markdown(body)
     return render_to_response('view_post.html', {
         'post': post,
-        'formatted_body': markdown.markdown(post.body) 
+        'body': body
     })
 
 def save_post(request, slug):
