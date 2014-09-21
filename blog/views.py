@@ -57,7 +57,13 @@ def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     print post
     res_dict = {'title': 'Edit Post', 'form': PostForm(instance=post)}
-    return render(request, 'new_post.html', res_dict)    
+    return render(request, 'new_post.html', res_dict) 
+
+@login_required(login_url='/blog/login/')
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return HttpResponseRedirect('/blog/')
 
 # show post and render as markdown if necessary
 def view_post(request, slug):   
