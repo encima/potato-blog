@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.shortcuts import render_to_response, get_object_or_404, render
 from django.http import HttpResponseRedirect
 import datetime, urllib
-import markdown
+# import markdown
 
 # show all blog posts
 def index(request):
@@ -64,8 +64,8 @@ def view_post(request, slug):
     print 'view post'
     post = get_object_or_404(Post, slug=slug)
     body = post.body
-    if(post.markdown == True):
-        body = markdown.markdown(body)
+    # if(post.markdown == True):
+        # body = markdown.markdown(body)
     return render_to_response('view_post.html', {
         'post': post,
         'body': body

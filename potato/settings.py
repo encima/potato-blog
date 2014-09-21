@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['encima-potato.appspot.com']
 
 
 # Application definition
@@ -44,7 +44,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -58,13 +58,11 @@ WSGI_APPLICATION = 'potato.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
- 'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'potato',
-        'USER': 'encima',
-        'PASSWORD': 'monkey',
-        'HOST': 'db4free.net',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '/cloudsql/encima-potato:blog',
+        'NAME': 'blog',
+        'USER': 'root',
     }
 }
 
