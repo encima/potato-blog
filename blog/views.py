@@ -13,15 +13,18 @@ def index(request):
 def new_post(request):
     if(request.method == 'POST'):
         form = PostForm(request.POST)
-        new = form.save(commit=False)
-        new.slug = urllib.quote_plus(new.title)
-        new.pub_date = datetime.datetime.now() 
-        t = Tag(1, 'test')
-        t.save()
-        new.tag = t
-        new.save()
-        print new
-        return HttpResponseRedirect('/blog/view/' + new.slug)
+        if(form.is_valid()):
+            new = form.save(commit=False)
+            new.slug = urllib.quote_plus(new.title)
+            new.pub_date = datetime.datetime.now() 
+            t = Tag(1, 'test')
+            t.save()
+            new.tag = t
+            new.save()
+            print new
+            return HttpResponseRedirect('/blog/view/' + new.slug)
+        else:
+            return render(request, 'new_post.html', {'form': form, 'title': 'New Post'})
     else:
         return render(request, 'new_post.html', {'form': PostForm(), 'title': 'New Post'})
 

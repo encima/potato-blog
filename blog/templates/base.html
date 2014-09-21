@@ -1,11 +1,95 @@
-<html>
-    <head>
-        <title>{% block head_title %}Potato - Ending the famine of good software development{% endblock %}</title>
-    </head>
-    <body>
-        <h1>{% block title %}We won't fry your brain{% endblock %}</h1>
-        {% block content %}
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+<title>Blog &ndash; </title>
+<link rel="stylesheet" href="{% static "css/pure/pure-min.css" %}">
+<!--[if lte IE 8]>
+  
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure//grids-responsive-old-ie.css">
+  
+<![endif]-->
+<!--[if gt IE 8]><!-->
+  
+    <link rel="stylesheet" href="{% static "css/pure/grids-responsive.css" %}">
+  
+<!--<![endif]-->
 
-        {% endblock %}
-    </body>
+  
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    <!--<![endif]-->
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">Potato</h1>
+            <h2 class="brand-tagline">Blog</h2>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="/blog/new">New</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">Post</h1>
+                    {% block post %}
+
+			        {% endblock %}
+                <!-- A single blog post -->
+        <!--         <section class="post">
+                    <header class="post-header">
+                        <img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="img/common/tilo-avatar.png">
+
+                        <h2 class="post-title">Introducing Pure</h2>
+
+                        <p class="post-meta">
+                            By <a href="#" class="post-author">Tilo Mitra</a> under <a class="post-category post-category-design" href="#">CSS</a> <a class="post-category post-category-pure" href="#">Pure</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            Yesterday at CSSConf, we launched Pure – a new CSS library. Phew! Here are the <a href="https://speakerdeck.com/tilomitra/pure-bliss">slides from the presentation</a>. Although it looks pretty minimalist, we’ve been working on Pure for several months. After many iterations, we have released Pure as a set of small, responsive, CSS modules that you can use in every web project.
+                        </p>
+                    </div>
+                </section>
+            </div> -->
+
+            <div class="posts">
+                <h1 class="content-subhead">{{title}}</h1>
+                {% block posts %}
+
+		        {% endblock %}
+            </div>
+
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul>
+                        <li><a href="http://purecss.io/">About</a></li>
+                        <li><a href="http://twitter.com/yuilibrary/">Twitter</a></li>
+                        <li><a href="http://github.com/yahoo/pure/">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
