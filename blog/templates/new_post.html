@@ -22,7 +22,7 @@
 	        </div>
 	    {% endfor %}
 	{% endif %}
-   <form action="/blog/new/" method="post" accept-charset="utf-8">
+   <form action="{{ submit }}" method="post" accept-charset="utf-8">
      {{form.as_p}}
      {% csrf_token %}
      <p><input type="submit" value="Save"></p>

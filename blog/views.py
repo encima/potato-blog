@@ -33,7 +33,8 @@ def user_logout(request):
 # validate blog post and save
 @login_required(login_url='/blog/login/')
 def new_post(request):
-    res_dict = {'title': 'New Post', 'form': PostForm()}
+    res_dict = {'title': 'New Post', 'form': PostForm(), 'submit': '/blog/new/'}
+
     if(request.method == 'POST'):
         form = PostForm(request.POST)
         res_dict['form'] = form
@@ -55,8 +56,18 @@ def new_post(request):
 @login_required(login_url='/blog/login/')
 def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    if(request.method == 'POST'):
+        form = PostForm(request.POST)
+        if(form.is_valid()):
+            post.title = form.cleaned_data['title']
+            post.body = form.cleaned_data['body']
+            post.slug = urllib.quote_plus(form.cleaned_data['title'])
+            post.tag = form.cleaned_data['tag']
+            post.save()
+            return HttpResponseRedirect('/blog/view/' + post.slug)
+
     print post
-    res_dict = {'title': 'Edit Post', 'form': PostForm(instance=post)}
+    res_dict = {'title': 'Edit Post', 'form': PostForm(instance=post), 'submit': '/blog/edit/' + slug}
     return render(request, 'new_post.html', res_dict) 
 
 @login_required(login_url='/blog/login/')
@@ -68,7 +79,7 @@ def delete_post(request, slug):
 # show post and render as markdown if necessary
 def view_post(request, slug):   
     print 'view post'
-    post = get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Post, slug='slug')
     body = post.body
     # if(post.markdown == True):
         # body = markdown.markdown(body)
