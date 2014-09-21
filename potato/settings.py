@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
+LOGIN_REDIRECT_URL = '/blog/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -61,9 +61,9 @@ DATABASES = {
  'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'potato',
-        'USER': 'root',
-        'PASSWORD': 'ace time',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'encima',
+        'PASSWORD': 'monkey',
+        'HOST': 'db4free.net',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }

@@ -24,15 +24,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return ('view_blog_post', None, { 'slug': self.slug })
 
-class PostForm(ModelForm):
-    class Meta:
-        model = Post
-        fields = ['title', 'body', 'markdown']
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=100, db_index=True)
-    slug = models.SlugField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True, unique=True)
 
     def __unicode__(self):
         return '%s' % self.name
@@ -40,3 +34,9 @@ class Tag(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, { 'slug': self.slug })
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'body', 'tag', 'markdown']
+

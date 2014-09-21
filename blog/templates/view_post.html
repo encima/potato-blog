@@ -2,6 +2,23 @@
 {% block head_title %}{{ post.title }}{% endblock %}
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block nav %}
+    <a class="pure-button" href="/blog">Home</a>
+    <a class="pure-button" href="/blog/edit/{{post.slug}}">Edit</a>
+{% endblock %}
+
 {% block post %}
-    {{ body | safe }}
+	<section class="post">
+    <header class="post-header">
+        <h2 class="post-title">{{post.title}}</h2>
+        <p class="post-meta">
+            At {{post.pub_date}} </a> under <a class="post-category post-category-pure" href="#">{{post.tag}}</a>
+        </p>
+    </header>
+    <div class="post-description">
+        <p>
+            {{ body | safe }}
+        </p>
+    </div>
+    
 {% endblock %}
